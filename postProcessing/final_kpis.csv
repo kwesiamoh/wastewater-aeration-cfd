@@ -1,0 +1,4 @@
+Case,kLa_h-1,low_velocity_pct,gas_holdup_pct,outlet_DO_mgL,outlet_Ss_mgL,outlet_Xs_mgL,outlet_biodegradable_COD_mgL,biodegradable_COD_removal_pct,hydraulic_mismatch_pct
+A,10.22,37.4,0.561,10.51884,0.14839,7.4916,7.63999,97.19,0.3
+B,7.13,39.6,0.369,7.50322,1.55113,91.23823,92.78935,65.86,0.49
+C,8.75,58.8,0.448,9.12704,0.9422,51.70902,52.65121,80.63,1.25

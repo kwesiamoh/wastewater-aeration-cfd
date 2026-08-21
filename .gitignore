@@ -1,0 +1,51 @@
+# OpenFOAM processor directories
+processor*/
+
+# OpenFOAM generated time directories
+[1-9]*/
+[1-9][0-9]*/
+[1-9][0-9][0-9]*/
+[1-9][0-9][0-9][0-9]*/
+
+# Logs
+log.*
+*.log
+
+# ParaView state/cache
+*.foam
+*.OpenFOAM
+*.pvd
+*.vtk
+*.vtu
+*.vtp
+*.pvtu
+
+# Large reconstructed CFD results
+postProcessing/*/0/
+postProcessing/*/[0-9]*/
+
+# Python
+__pycache__/
+*.pyc
+
+# Editors/system
+.DS_Store
+Thumbs.db
+
+# Generated OpenFOAM mesh
+**/constant/polyMesh/
+
+# Frozen CFD fields generated from aeration simulations
+**/alphaPhi.waterMean
+**/alphaUwaterMean
+**/alpha.waterMean
+**/nut.waterMean
+**/DOsatLocalMean
+**/oxygenTransferCoeffPostMean
+
+# Parallel decomposition
+**/processor*/
+
+# Logs
+log.*
+*.log

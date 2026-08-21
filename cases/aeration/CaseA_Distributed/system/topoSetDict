@@ -1,0 +1,80 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+actions
+(
+    // Create the set using diffuser row 1
+    {
+        name    diffuserFaces;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+
+        sourceInfo
+        {
+            box
+                (1.999999 0.499999 -0.000001)
+                (38.000001 0.750001 0.000001);
+        }
+    }
+
+    // Add diffuser row 2
+    {
+        name    diffuserFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+
+        sourceInfo
+        {
+            box
+                (1.999999 1.749999 -0.000001)
+                (38.000001 2.000001 0.000001);
+        }
+    }
+
+    // Add diffuser row 3
+    {
+        name    diffuserFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+
+        sourceInfo
+        {
+            box
+                (1.999999 2.999999 -0.000001)
+                (38.000001 3.250001 0.000001);
+        }
+    }
+
+    // Add diffuser row 4
+    {
+        name    diffuserFaces;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+
+        sourceInfo
+        {
+            box
+                (1.999999 4.249999 -0.000001)
+                (38.000001 4.500001 0.000001);
+        }
+    }
+);
+
+// ************************************************************************* //

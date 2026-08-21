@@ -1,0 +1,75 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      DOProperties;
+}
+
+
+// Molecular diffusivity of oxygen in water [m2/s]
+DmDO
+[
+    0 2 -1 0 0 0 0
+]
+1.6e-9;
+
+
+// Turbulent Schmidt number [-]
+ScT
+[
+    0 0 0 0 0 0 0
+]
+0.70;
+
+
+// Clean-water oxygen saturation concentration at 12 degC
+// 10.8 mg/L = 0.0108 kg/m3
+DOsatRef
+[
+    1 -3 0 0 0 0 0
+]
+0.0108;
+
+
+// Reference absolute pressure [Pa]
+pRefDO
+[
+    1 -1 -2 0 0 0 0
+]
+100000;
+
+
+// Wastewater correction to mass transfer [-]
+alphaFactor
+[
+    0 0 0 0 0 0 0
+]
+0.60;
+
+
+// Wastewater correction to oxygen saturation [-]
+betaFactor
+[
+    0 0 0 0 0 0 0
+]
+0.95;
+
+
+// Effective bubble diameter [m]
+dBubble
+[
+    0 1 0 0 0 0 0
+]
+0.003;
+
+
+// ************************************************************************* //

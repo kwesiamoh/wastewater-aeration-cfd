@@ -1,0 +1,64 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      lowVelocityDict;
+}
+
+functions
+{
+    loadFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            U.water
+            alpha.water
+        );
+    }
+
+    waterSpeed
+    {
+        type            mag;
+        libs            (fieldFunctionObjects);
+
+        field           U.water;
+        result          UmagWater;
+    }
+
+    lowVelocityMask
+    {
+        type            exprField;
+        libs            (fieldFunctionObjects);
+
+        field           lowVelocityMask;
+        action          new;
+
+        expression      "(UmagWater < 0.2) ? 1 : 0";
+        dimensions      [0 0 0 0 0 0 0];
+
+        autowrite       true;
+        store           true;
+    }
+
+    lowVelocityFraction
+    {
+        type            volFieldValue;
+        libs            (fieldFunctionObjects);
+
+        log             true;
+        writeFields     false;
+
+        regionType      all;
+        operation       weightedVolAverage;
+        weightField     alpha.water;
+
+        fields
+        (
+            lowVelocityMask
+        );
+    }
+}

@@ -1,0 +1,53 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      bioMeanDict;
+}
+
+functions
+{
+    loadBioFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            kLa
+            DOsatLocal
+            nut.water
+        );
+    }
+
+    bioMean
+    {
+        type            fieldAverage;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            kLa
+            {
+                mean            yes;
+                prime2Mean      no;
+                base            iteration;
+            }
+
+            DOsatLocal
+            {
+                mean            yes;
+                prime2Mean      no;
+                base            iteration;
+            }
+
+            nut.water
+            {
+                mean            yes;
+                prime2Mean      no;
+                base            iteration;
+            }
+        );
+    }
+}

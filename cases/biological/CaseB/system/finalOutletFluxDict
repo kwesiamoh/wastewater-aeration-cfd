@@ -1,0 +1,91 @@
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      finalOutletFluxDict;
+}
+
+functions
+{
+    outletWeighted
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+
+        log             true;
+        writeFields     false;
+
+        regionType      patch;
+        name            outlet;
+
+        operation       weightedAverage;
+        weightField     alphaPhi.waterMean;
+
+        fields
+        (
+            Ss
+            Xs
+            DO
+        );
+    }
+
+    inletWeighted
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+
+        log             true;
+        writeFields     false;
+
+        regionType      patch;
+        name            inlet;
+
+        operation       weightedAverage;
+        weightField     alphaPhi.waterMean;
+
+        fields
+        (
+            Ss
+            Xs
+            DO
+        );
+    }
+
+    outletFlow
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+
+        log             true;
+        writeFields     false;
+
+        regionType      patch;
+        name            outlet;
+
+        operation       sum;
+
+        fields
+        (
+            alphaPhi.waterMean
+        );
+    }
+
+    inletFlow
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+
+        log             true;
+        writeFields     false;
+
+        regionType      patch;
+        name            inlet;
+
+        operation       sum;
+
+        fields
+        (
+            alphaPhi.waterMean
+        );
+    }
+}

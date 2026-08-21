@@ -1,0 +1,62 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      Theta;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions          [0 2 -2 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    inlet
+    {
+        type            fixedValue;
+        value           uniform 1e-7;
+    }
+
+    outlet
+    {
+        type            inletOutlet;
+        phi             phi.air;
+        inletValue      uniform 1e-7;
+        value           uniform 1e-7;
+    }
+
+    sideWalls
+    {
+        type            zeroGradient;
+    }
+
+    floor
+    {
+        type            zeroGradient;
+    }
+
+    atmosphere
+    {
+        type            inletOutlet;
+        phi             phi.air;
+        inletValue      uniform 1e-7;
+        value           uniform 1e-7;
+    }
+
+    diffusers
+    {
+        type            fixedValue;
+        value           uniform 1e-7;
+    }
+}
+
+// ************************************************************************* //

@@ -1,0 +1,48 @@
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      convergenceAveragesDict;
+}
+
+functions
+{
+    tankAverage
+    {
+        type            volFieldValue;
+        libs            (fieldFunctionObjects);
+
+        log             true;
+        writeFields     false;
+
+        operation       volAverage;
+
+        fields
+        (
+            Ss
+            Xs
+            DO
+        );
+    }
+
+    outletAverage
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+
+        log             true;
+        writeFields     false;
+
+        regionType      patch;
+        name            outlet;
+
+        operation       areaAverage;
+
+        fields
+        (
+            Ss
+            Xs
+            DO
+        );
+    }
+}

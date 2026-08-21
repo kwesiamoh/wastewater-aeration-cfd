@@ -1,0 +1,40 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      tankAirDict;
+}
+
+functions
+{
+    loadAirFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            alpha.air
+            alpha.water
+        );
+    }
+
+    tankAir
+    {
+        type            volFieldValue;
+        libs            (fieldFunctionObjects);
+
+        log             true;
+        writeFields     false;
+
+        regionType      all;
+        operation       weightedVolAverage;
+        weightField     alpha.water;
+
+        fields
+        (
+            alpha.air
+        );
+    }
+}

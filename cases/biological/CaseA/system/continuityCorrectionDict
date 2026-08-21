@@ -1,0 +1,28 @@
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      continuityCorrectionDict;
+}
+
+functions
+{
+    continuityCorrection
+    {
+        type            volFieldValue;
+        libs            (fieldFunctionObjects);
+
+        log             true;
+        writeFields     false;
+
+        operation       weightedVolIntegrate;
+
+        weightField     "div(alphaPhi.waterMean)";
+
+        fields
+        (
+            Ss
+            Xs
+        );
+    }
+}

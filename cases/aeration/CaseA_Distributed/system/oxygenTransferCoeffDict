@@ -1,0 +1,36 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      oxygenTransferCoeffDict;
+}
+
+functions
+{
+    loadFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            alpha.water
+            kLa
+        );
+    }
+
+    oxygenTransferCoeffPost
+    {
+        type            multiply;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            alpha.water
+            kLa
+        );
+
+        result          oxygenTransferCoeffPost;
+    }
+}

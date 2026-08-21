@@ -1,0 +1,55 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      DOUniformityDict;
+}
+
+functions
+{
+    loadFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            DO
+            alpha.water
+        );
+    }
+
+    DO2
+    {
+        type            multiply;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            DO
+            DO
+        );
+
+        result          DO2;
+    }
+
+    doStats
+    {
+        type            volFieldValue;
+        libs            (fieldFunctionObjects);
+
+        log             true;
+        writeFields     false;
+
+        regionType      all;
+        operation       weightedVolAverage;
+        weightField     alpha.water;
+
+        fields
+        (
+            DO
+            DO2
+        );
+    }
+}
