@@ -78,13 +78,9 @@ Important averaged fields include:
 
 The reduced biological model then uses these established mean hydrodynamic fields instead of rerunning the full multiphase CFD.
 
-<!-- OPTIONAL VIDEO / GIF PLACEHOLDER -->
 ### Aeration flow development
 
 ![Aeration flow animation](figures/overview/aeration_flow.gif)
-
-> Replace this GIF with a short ParaView animation showing the development of the air phase or water circulation.
-
 ---
 
 ## Reduced ASM1 biological model
