@@ -5,6 +5,7 @@ OpenFOAM study of aeration-tank hydrodynamics, air–water mixing, oxygen transf
 The project compares three diffuser arrangements using the same tank geometry, operating conditions, airflow basis, and reduced biological model.
 
 **Diffuser layout → air distribution → water circulation → oxygen transfer → dissolved oxygen → biodegradable substrate COD**
+
 ![Diffuser layout comparison](figures/overview/diffuser_layout_comparison.png)
 
 ---
@@ -13,9 +14,9 @@ The project compares three diffuser arrangements using the same tank geometry, o
 
 Three diffuser layouts were studied:
 
-- **Case A – Distributed Diffuser Rows**
-- **Case B – Central Diffuser Rows**
-- **Case C – Lateral Diffuser Rows**
+- **Case A – Distributed Diffuser Strips**
+- **Case B – Central Diffuser Strip**
+- **Case C – Lateral Diffuser Strips**
 
 The aim was to compare how diffuser placement changes gas distribution, circulation, oxygen-transfer behaviour, DO uniformity, and biodegradable substrate removal.
 
@@ -53,7 +54,11 @@ The project was completed in two main stages.
 
 ### 1. Multiphase aeration simulation
 
-The first stage resolved:
+A custom OpenFOAM solver, `aerationDOFoam`, was developed for the aeration stage.
+
+The solver extends the multiphase air–water calculation with dissolved-oxygen transport and oxygen-transfer calculations.
+
+The first stage resolves:
 
 - air distribution
 - water circulation
@@ -63,9 +68,9 @@ The first stage resolved:
 - oxygen saturation
 - oxygen transfer
 
-The multiphase solution was allowed to develop before the main fields were time averaged.
+The multiphase solution was allowed to develop before the main fields were time averaged and post-processed.
 
-Important averaged fields include:
+The main averaged and derived fields used in the biological stage include:
 
 - `U.waterMean`
 - `alpha.airMean`
@@ -76,26 +81,24 @@ Important averaged fields include:
 - `DOsatLocalMean`
 - `oxygenTransferCoeffPostMean`
 
-The reduced biological model then uses these established mean hydrodynamic fields instead of rerunning the full multiphase CFD.
+These fields provide the hydrodynamic and oxygen-transfer input for the reduced biological model.
 
-### Aeration flow development
+#### Aeration plume development
+A short transient animation was produced to show how the air phase develops after aeration starts and how plume formation differs between the three diffuser layouts.
 
 ![Aeration flow animation](figures/overview/aeration_flow.gif)
+
 ---
 
-## Reduced ASM1 biological model
+### 2. Reduced ASM1 biological simulation
 
-A custom OpenFOAM solver named:
+A second custom OpenFOAM solver, `aerationASM1ReducedFoam`, was developed for the biological stage.
 
-```text
-aerationASM1ReducedFoam
-```
-
-was developed for the biological stage.
+The biological model uses the established time-averaged hydrodynamic and oxygen-transfer fields from the aeration simulation instead of rerunning the full multiphase CFD.
 
 The model is based on the aerobic carbon-removal part of ASM1.
 
-The main state variables are:
+The main model variables are:
 
 | Field | Description |
 |---|---|
@@ -204,10 +207,8 @@ A representative horizontal slice was taken at:
 z = 2.565 m
 ```
 
-The same colour scale was used for all three cases.
-
-Case A spreads the gas phase across a much larger part of the tank.  
-Case B concentrates the gas along a central circulation path.  
+Case A spreads the gas phase across a much larger part of the tank.  
+Case B concentrates the gas in a central plume region.  
 Case C keeps most of the gas close to the lateral diffuser regions.
 
 ![Mean air volume fraction at mid-depth](figures/hydrodynamics/mean_air_volume_fraction_middepth.png)
@@ -259,7 +260,7 @@ Field:
 oxygenTransferCoeffBio
 ```
 
-Maximum corrected oxygen-transfer coefficient:
+Maximum oxygen-transfer coefficient:
 
 | Case | Maximum `kLa` |
 |---|---:|
@@ -293,9 +294,9 @@ Field:
 oxygenTransferRate
 ```
 
-Integrated oxygen-transfer rates:
+Integrated net oxygen-transfer rates:
 
-| Case | Oxygen transfer |
+| Case | Net oxygen transfer |
 |---|---:|
 | Case A – Distributed | **0.002410 kg/s** |
 | Case B – Central | **0.002383 kg/s** |
@@ -519,7 +520,6 @@ The project includes:
 - solver convergence checks
 - time averaging of multiphase fields
 - conservative biological flux correction
-- common colour scales across cases
 - oxygen-transfer balance checks
 - oxygen-consumption checks
 - volume-weighted performance metrics
@@ -527,7 +527,7 @@ The project includes:
 - DO uniformity calculations
 - substrate uniformity calculations
 
-The results are treated as numerically verified CFD results.
+The results were checked for numerical convergence, conservation, and consistency. They are not presented as experimentally validated results.
 
 ---
 
@@ -536,33 +536,33 @@ The results are treated as numerically verified CFD results.
 ```text
 .
 ├── README.md
-├── solver/
-│   └── aerationASM1ReducedFoam/
+├── solvers
+│   ├── aerationASM1ReducedFoam
+│   └── aerationDOFoam
 │
-├── cases/
-│   ├── CaseA_Distributed/
-│   ├── CaseB_Central/
-│   └── CaseC_Lateral/
+├── cases
+│   ├── aeration
+│   │   ├── CaseA_Distributed
+│   │   ├── CaseB_Central
+│   │   └── CaseC_Lateral
+│   │
+│   └── biological
+│       ├── CaseA_Distributed
+│       ├── CaseB_Central
+│       └── CaseC_Lateral
 │
-├── postProcessing/
-│   ├── dictionaries/
-│   └── scripts/
+├── postProcessing
+│   ├── dictionaries
+│   └── scripts
 │
-├── figures/
-│   ├── overview/
-│   ├── hydrodynamics/
-│   ├── oxygen_transfer/
-│   └── biological_response/
-│
-├── media/
-│   └── animations/
-│
-└── docs/
+└── figures
+    ├── overview
+    ├── hydrodynamics
+    ├── oxygen_transfer
+    └── biological_response
 ```
 
-The repository contains the case setup, custom reduced ASM1 solver, post-processing tools, comparison results, and final visualisations.
-
-Large transient simulation outputs and processor directories are not intended to be stored directly in Git.
+The repository contains the reproducible case setups, custom OpenFOAM solvers, final comparison metrics, and selected visualisations.
 
 ---
 
@@ -570,7 +570,9 @@ Large transient simulation outputs and processor directories are not intended to
 
 - OpenFOAM v2412
 - ParaView
-- Custom OpenFOAM solver: `aerationASM1ReducedFoam`
+- Custom OpenFOAM solvers:
+  - `aerationDOFoam`
+  - `aerationASM1ReducedFoam`
 
 ---
 
