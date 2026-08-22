@@ -6,7 +6,6 @@ The project compares three diffuser arrangements using the same tank geometry, o
 
 **Diffuser layout → air distribution → water circulation → oxygen transfer → dissolved oxygen → biodegradable substrate COD**
 ![Diffuser layout comparison](figures/overview/diffuser_layout_comparison.png)
-![3D tank geometry](figures/overview/tank_geometry_3d.png)
 
 ---
 
@@ -82,7 +81,7 @@ The reduced biological model then uses these established mean hydrodynamic field
 <!-- OPTIONAL VIDEO / GIF PLACEHOLDER -->
 ### Aeration flow development
 
-![Aeration flow animation](media/animations/aeration_flow.gif)
+![Aeration flow animation](figures/overview/aeration_flow.gif)
 
 > Replace this GIF with a short ParaView animation showing the development of the air phase or water circulation.
 
