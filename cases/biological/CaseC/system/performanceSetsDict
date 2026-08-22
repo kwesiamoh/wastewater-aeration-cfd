@@ -1,0 +1,43 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      performanceSetsDict;
+}
+
+actions
+(
+    {
+        name        lowDO2;
+        type        cellSet;
+        action      new;
+        source      fieldToCell;
+
+        field       SO;
+        min         -1e30;
+        max         0.002;
+    }
+
+    {
+        name        lowDO4;
+        type        cellSet;
+        action      new;
+        source      fieldToCell;
+
+        field       SO;
+        min         -1e30;
+        max         0.004;
+    }
+
+    {
+        name        highSubstrate20;
+        type        cellSet;
+        action      new;
+        source      fieldToCell;
+
+        field       substrateCOD;
+        min         0.020;
+        max         1e30;
+    }
+);

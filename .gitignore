@@ -1,17 +1,12 @@
-# OpenFOAM processor directories
+# OpenFOAM parallel decomposition
 processor*/
+**/processor*/
 
-# OpenFOAM generated time directories
-[1-9]*/
-[1-9][0-9]*/
-[1-9][0-9][0-9]*/
-[1-9][0-9][0-9][0-9]*/
-
-# Logs
+# Solver logs
 log.*
 *.log
 
-# ParaView state/cache
+# ParaView / VTK generated output
 *.foam
 *.OpenFOAM
 *.pvd
@@ -20,32 +15,37 @@ log.*
 *.vtp
 *.pvtu
 
-# Large reconstructed CFD results
-postProcessing/*/0/
-postProcessing/*/[0-9]*/
+# Generated post-processing
+**/postProcessing/
+**/VTK/
+
+# Backup / archive material
+**/archive/
+**/*_nonconverged*/
+*.bak
+*.old
+*beforeBCfix*
 
 # Python
 __pycache__/
 *.pyc
 
-# Editors/system
+# Editors / OS
 .DS_Store
 Thumbs.db
 
-# Generated OpenFOAM mesh
-**/constant/polyMesh/
+# Generated OpenFOAM time directories
+# Keep biological/Case*/300 because those contain the frozen fields
+cases/aeration/*/[1-9]*/
+cases/aeration/*/[1-9][0-9]*/
+cases/aeration/*/[1-9][0-9][0-9]*/
 
-# Frozen CFD fields generated from aeration simulations
-**/alphaPhi.waterMean
-**/alphaUwaterMean
-**/alpha.waterMean
-**/nut.waterMean
-**/DOsatLocalMean
-**/oxygenTransferCoeffPostMean
+cases/biological/*/301/
+cases/biological/*/[4-9][0-9][0-9]/
+cases/biological/*/[1-9][0-9][0-9][0-9]/
 
-# Parallel decomposition
-**/processor*/
+# Generated mesh
+# Aeration meshes can be rebuilt from blockMeshDict
+cases/aeration/*/constant/polyMesh/
 
-# Logs
-log.*
-*.log
+# Keep biological frozen-flow setup fields in 300/

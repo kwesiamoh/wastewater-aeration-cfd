@@ -1,0 +1,63 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      oxygenTransferRateDict;
+}
+
+functions
+{
+    loadFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            SO
+            DOsatLocalMean
+            oxygenTransferCoeffBio
+        );
+    }
+
+    oxygenDrivingForce
+    {
+        type            subtract;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            DOsatLocalMean
+            SO
+        );
+
+        result          oxygenDrivingForce;
+    }
+
+    oxygenTransferRate
+    {
+        type            multiply;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            oxygenTransferCoeffBio
+            oxygenDrivingForce
+        );
+
+        result          oxygenTransferRate;
+    }
+
+    range
+    {
+        type            fieldMinMax;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            oxygenDrivingForce
+            oxygenTransferRate
+        );
+    }
+}

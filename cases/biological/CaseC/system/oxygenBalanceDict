@@ -1,0 +1,90 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      oxygenBalanceDict;
+}
+
+functions
+{
+    loadFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            alphaBio
+            oxygenUptakeH
+            SO
+            DOsatLocalMean
+            oxygenTransferCoeffBio
+        );
+    }
+
+
+    oxygenDrivingForce
+    {
+        type            subtract;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            DOsatLocalMean
+            SO
+        );
+
+        result          oxygenDrivingForce;
+    }
+
+
+    oxygenTransferRate
+    {
+        type            multiply;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            oxygenTransferCoeffBio
+            oxygenDrivingForce
+        );
+
+        result          oxygenTransferRate;
+    }
+
+
+    oxygenUptakeBulk
+    {
+        type            multiply;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            alphaBio
+            oxygenUptakeH
+        );
+
+        result          oxygenUptakeBulk;
+    }
+
+
+    totals
+    {
+        type            volFieldValue;
+        libs            (fieldFunctionObjects);
+
+        regionType      all;
+        operation       volIntegrate;
+
+        fields
+        (
+            oxygenTransferRate
+            oxygenUptakeBulk
+        );
+
+        writeFields     false;
+        writeToFile     true;
+        log             true;
+    }
+}

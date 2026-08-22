@@ -1,0 +1,75 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      asmOutletDict;
+}
+
+functions
+{
+    loadFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            SS
+            XS
+            SO
+            substrateCOD
+            solubleCOD
+        );
+    }
+
+    outletASM
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+
+        regionType      patch;
+        name            outlet;
+
+        operation       areaAverage;
+
+        fields
+        (
+            SS
+            XS
+            SO
+            substrateCOD
+            solubleCOD
+        );
+
+        writeFields     false;
+        writeArea       false;
+        writeToFile     true;
+        log             true;
+    }
+
+    inletASM
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+
+        regionType      patch;
+        name            inlet;
+
+        operation       areaAverage;
+
+        fields
+        (
+            SS
+            XS
+            SO
+            substrateCOD
+            solubleCOD
+        );
+
+        writeFields     false;
+        writeArea       false;
+        writeToFile     true;
+        log             true;
+    }
+}

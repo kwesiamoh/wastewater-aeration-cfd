@@ -1,0 +1,77 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      uniformityMetricsDict;
+}
+
+functions
+{
+    loadFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            alpha.waterMean
+            SO
+            substrateCOD
+        );
+    }
+
+
+    SO2
+    {
+        type            multiply;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            SO
+            SO
+        );
+
+        result          SO2;
+    }
+
+
+    substrateCOD2
+    {
+        type            multiply;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            substrateCOD
+            substrateCOD
+        );
+
+        result          substrateCOD2;
+    }
+
+
+    liquidUniformity
+    {
+        type            volFieldValue;
+        libs            (fieldFunctionObjects);
+
+        regionType      all;
+        operation       weightedVolAverage;
+
+        weightField     alpha.waterMean;
+
+        fields
+        (
+            SO
+            SO2
+            substrateCOD
+            substrateCOD2
+        );
+
+        writeFields     false;
+        writeToFile     true;
+        log             true;
+    }
+}

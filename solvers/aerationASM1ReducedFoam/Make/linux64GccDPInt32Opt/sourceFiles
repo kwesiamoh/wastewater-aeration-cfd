@@ -1,0 +1,4 @@
+SOURCE = \
+aerationASM1ReducedFoam.C \
+
+# sources

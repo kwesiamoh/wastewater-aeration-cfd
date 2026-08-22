@@ -1,0 +1,48 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      supersatProbeDict;
+}
+
+functions
+{
+    loadFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            alpha.waterMean
+            SO
+            DOsatLocalMean
+            oxygenTransferCoeffBio
+            bubbleOTMask
+        );
+    }
+
+    topProbe
+    {
+        type            probes;
+        libs            (sampling);
+
+        fields
+        (
+            alpha.waterMean
+            SO
+            DOsatLocalMean
+            oxygenTransferCoeffBio
+            bubbleOTMask
+        );
+
+        probeLocations
+        (
+            (29.375 1.125 5.13)
+            (29.375 1.125 5.0775)
+            (29.375 1.125 4.9725)
+            (29.375 1.125 4.75)
+        );
+    }
+}

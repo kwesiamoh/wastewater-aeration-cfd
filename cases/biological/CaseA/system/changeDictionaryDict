@@ -1,0 +1,44 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      changeDictionaryDict;
+}
+
+SO
+{
+    boundaryField
+    {
+        inlet
+        {
+            type            fixedValue;
+            value           uniform 0.0005;
+        }
+
+        outlet
+        {
+            type            zeroGradient;
+        }
+
+        sideWalls
+        {
+            type            zeroGradient;
+        }
+
+        floor
+        {
+            type            zeroGradient;
+        }
+
+        atmosphere
+        {
+            type            zeroGradient;
+        }
+
+        diffusers
+        {
+            type            zeroGradient;
+        }
+    }
+}

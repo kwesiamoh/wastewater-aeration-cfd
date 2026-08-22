@@ -6,40 +6,45 @@ FoamFile
     object      fvSchemes;
 }
 
+
 ddtSchemes
 {
     default         steadyState;
 }
+
 
 gradSchemes
 {
     default         Gauss linear;
 }
 
+
 divSchemes
 {
-    default         none;
+    default                     none;
 
-	div(alphaPhi.waterMean,Xs)     Gauss upwind;
-	div(alphaPhi.waterMean,Ss)     Gauss upwind;
-	div(alphaPhi.waterMean,DO)     Gauss upwind;
+    div(alphaPhiBio,SS)         Gauss upwind;
+    div(alphaPhiBio,XS)         Gauss upwind;
+    div(alphaPhiBio,SO)         Gauss upwind;
 }
+
 
 laplacianSchemes
 {
-    default                         none;
-
-    laplacian(alphaDeffXs,Xs)       Gauss linear corrected;
-    laplacian(alphaDeffSs,Ss)       Gauss linear corrected;
-    laplacian(alphaDeffDO,DO)       Gauss linear corrected;
+    default         Gauss linear uncorrected;
 }
+
 
 interpolationSchemes
 {
     default         linear;
 }
 
+
 snGradSchemes
 {
-    default         corrected;
+    default         uncorrected;
 }
+
+
+// ************************************************************************* //

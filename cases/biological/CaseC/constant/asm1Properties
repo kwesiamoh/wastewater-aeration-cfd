@@ -1,0 +1,123 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| Reduced aerobic ASM1 parameters                                          |
+| Baseline temperature: 12 degC                                            |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      asm1Properties;
+}
+
+
+// ------------------------------------------------------------------------- //
+// Transport
+// ------------------------------------------------------------------------- //
+
+// Soluble-species molecular diffusivity [m2/s]
+DmSoluble
+[
+    0 2 -1 0 0 0 0
+]
+1e-9;
+
+
+// Small numerical diffusivity for particulate fields.
+// Turbulent dispersion remains dominant.
+DmParticulate
+[
+    0 2 -1 0 0 0 0
+]
+1e-12;
+
+
+// Turbulent Schmidt number
+ScT
+[
+    0 0 0 0 0 0 0
+]
+0.7;
+
+
+// ------------------------------------------------------------------------- //
+// ASM1 heterotrophic kinetics at 12 degC
+//
+// Reference BSM1 values at approx. 15 degC:
+//     muH = 4.0 d-1
+//     bH  = 0.30 d-1
+//     kh  = 3.0 d-1
+//
+// Temperature-adjusted values at 12 degC have been converted to 1/s.
+// ------------------------------------------------------------------------- //
+
+muH
+[
+    0 0 -1 0 0 0 0
+]
+3.89568e-05;
+
+
+bH
+[
+    0 0 -1 0 0 0 0
+]
+2.72241e-06;
+
+
+kh
+[
+    0 0 -1 0 0 0 0
+]
+3.11242e-05;
+
+
+// ------------------------------------------------------------------------- //
+// Half-saturation / hydrolysis parameters
+// ------------------------------------------------------------------------- //
+
+// KS = 10 mg COD/L = 0.010 kg COD/m3
+KS
+[
+    1 -3 0 0 0 0 0
+]
+0.010;
+
+
+// KOH = 0.2 mg O2/L = 0.0002 kg O2/m3
+KOH
+[
+    1 -3 0 0 0 0 0
+]
+0.0002;
+
+
+// Hydrolysis saturation coefficient
+KX
+[
+    0 0 0 0 0 0 0
+]
+0.1;
+
+
+// ------------------------------------------------------------------------- //
+// Stoichiometry
+// ------------------------------------------------------------------------- //
+
+YH
+[
+    0 0 0 0 0 0 0
+]
+0.67;
+
+
+// Fraction of decayed biomass forming particulate inert products
+fP
+[
+    0 0 0 0 0 0 0
+]
+0.08;
+
+
+// ************************************************************************* //

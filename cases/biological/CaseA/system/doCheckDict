@@ -1,0 +1,49 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      doCheckDict;
+}
+
+functions
+{
+    loadFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            SO
+            DOsatLocalMean
+        );
+    }
+
+    DOminusSat
+    {
+        type            subtract;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            SO
+            DOsatLocalMean
+        );
+
+        result          DOminusSat;
+    }
+
+    range
+    {
+        type            fieldMinMax;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            SO
+            DOsatLocalMean
+            DOminusSat
+        );
+    }
+}
