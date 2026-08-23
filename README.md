@@ -14,9 +14,9 @@ The project compares three diffuser arrangements using the same tank geometry, o
 
 Three diffuser layouts were studied:
 
-- **Case A – Distributed Diffuser Strips**
-- **Case B – Central Diffuser Strip**
-- **Case C – Lateral Diffuser Strips**
+- **Case A – Distributed Diffuser Rows**
+- **Case B – Central Diffuser Bank**
+- **Case C – Lateral Diffuser Banks**
 
 The aim was to compare how diffuser placement changes gas distribution, circulation, oxygen-transfer behaviour, DO uniformity, and biodegradable substrate removal.
 
@@ -81,7 +81,7 @@ The main averaged and derived fields used in the biological stage include:
 - `DOsatLocalMean`
 - `oxygenTransferCoeffPostMean`
 
-These fields provide the hydrodynamic and oxygen-transfer input for the reduced biological model.
+These time-averaged and derived fields are passed forward as frozen hydrodynamic and oxygen-transfer inputs for the reduced biological model. They are not all direct solver outputs.
 
 #### Aeration plume development
 A short transient animation was produced to show how the air phase develops after aeration starts and how plume formation differs between the three diffuser layouts.
@@ -94,7 +94,7 @@ A short transient animation was produced to show how the air phase develops afte
 
 A second custom OpenFOAM solver, `aerationASM1ReducedFoam`, was developed for the biological stage.
 
-The biological model uses the established time-averaged hydrodynamic and oxygen-transfer fields from the aeration simulation instead of rerunning the full multiphase CFD.
+The biological model uses the established frozen, time-averaged hydrodynamic and oxygen-transfer fields from the aeration simulation instead of rerunning the full multiphase CFD.
 
 The model is based on the aerobic carbon-removal part of ASM1.
 
@@ -122,6 +122,8 @@ The model includes:
 The heterotrophic biomass concentration is prescribed because the CFD domain does not contain a secondary clarifier, return activated sludge loop, or waste activated sludge system.
 
 The model therefore represents aerobic carbon removal inside the aeration tank rather than a complete activated-sludge plant.
+
+The earlier simplified BioCOD calculations are superseded development results and are not mixed with the final reduced ASM1 results reported below.
 
 ---
 
@@ -201,6 +203,8 @@ Field:
 alpha.airMean
 ```
 
+`alpha.airMean` is the time-averaged air-volume-fraction field from the aeration stage, averaged over **180–300 s**. It is not an instantaneous field and is not a reduced ASM1 result.
+
 A representative horizontal slice was taken at:
 
 ```text
@@ -224,6 +228,8 @@ Field:
 mag(U.waterMean)
 ```
 
+These figures are based on the time-averaged `U.waterMean` field produced during the aeration stage.
+
 Maximum mean water velocity:
 
 | Case | Maximum velocity |
@@ -242,11 +248,11 @@ The results show that maximum velocity alone is not enough to judge mixing quali
 
 ![Case A mean water velocity](figures/hydrodynamics/mean_water_velocity_caseA.png)
 
-### Case B – Central Diffuser Rows
+### Case B – Central Diffuser Bank
 
 ![Case B mean water velocity](figures/hydrodynamics/mean_water_velocity_caseB.png)
 
-### Case C – Lateral Diffuser Rows
+### Case C – Lateral Diffuser Banks
 
 ![Case C mean water velocity](figures/hydrodynamics/mean_water_velocity_caseC.png)
 
@@ -276,11 +282,11 @@ Case A distributes oxygen-transfer capacity through a larger part of the tank.
 
 ![Case A oxygen transfer coefficient](figures/oxygen_transfer/oxygen_transfer_coefficient_caseA.png)
 
-### Case B – Central Diffuser Rows
+### Case B – Central Diffuser Bank
 
 ![Case B oxygen transfer coefficient](figures/oxygen_transfer/oxygen_transfer_coefficient_caseB.png)
 
-### Case C – Lateral Diffuser Rows
+### Case C – Lateral Diffuser Banks
 
 ![Case C oxygen transfer coefficient](figures/oxygen_transfer/oxygen_transfer_coefficient_caseC.png)
 
@@ -302,23 +308,43 @@ Integrated net oxygen-transfer rates:
 | Case B – Central | **0.002383 kg/s** |
 | Case C – Lateral | **0.002384 kg/s** |
 
-The total transfer rates are similar, but the spatial distribution is different between the layouts.
+The integrated net oxygen-transfer rates are very similar. Diffuser layout therefore changes the spatial distribution of oxygen transfer and dissolved oxygen much more strongly than the overall net transfer magnitude.
 
 ### Case A – Distributed Diffuser Rows
 
 ![Case A oxygen transfer rate](figures/oxygen_transfer/oxygen_transfer_rate_caseA.png)
 
-### Case B – Central Diffuser Rows
+### Case B – Central Diffuser Bank
 
 ![Case B oxygen transfer rate](figures/oxygen_transfer/oxygen_transfer_rate_caseB.png)
 
-### Case C – Lateral Diffuser Rows
+### Case C – Lateral Diffuser Banks
 
 ![Case C oxygen transfer rate](figures/oxygen_transfer/oxygen_transfer_rate_caseC.png)
 
 ---
 
 ## Dissolved oxygen
+
+The biological calculation follows this sequence:
+
+**time-averaged aeration DO → reduced ASM1 transport/reaction → steady-state DO**
+
+The `DOMean` field from `aerationDOFoam` is supplied as the initial dissolved-oxygen field for `aerationASM1ReducedFoam`.
+
+### Initial mean DO field from aeration CFD — Case A – Distributed Diffuser Rows
+
+![Case A initial mean DO field from aeration CFD](figures/biological_response/initial_mean_DO_caseA.png)
+
+### Initial mean DO field from aeration CFD — Case B – Central Diffuser Bank
+
+![Case B initial mean DO field from aeration CFD](figures/biological_response/initial_mean_DO_caseB.png)
+
+### Initial mean DO field from aeration CFD — Case C – Lateral Diffuser Banks
+
+![Case C initial mean DO field from aeration CFD](figures/biological_response/initial_mean_DO_caseC.png)
+
+### Steady-state reduced ASM1 dissolved oxygen
 
 Field:
 
@@ -354,7 +380,7 @@ Case C produces the largest spatial variation.
 | Case B – Central | **0%** |
 | Case C – Lateral | **0.77%** |
 
-The low-DO region in Case C is localised rather than tank-wide.
+The low-DO region in Case C is localised rather than tank-wide. It mainly follows an axial inlet-to-downstream gradient and is not evidence that the lateral diffuser banks fail to oxygenate the sides. A field check found a minimum of **0.5 mg/L** near `x = 0` and a maximum of approximately **11.83 mg/L** near `x = 37.1 m`, `y = 4.47 m`, close to a lateral region. This is internally consistent with the lateral-bank configuration.
 
 ### Flow-weighted outlet DO
 
@@ -364,15 +390,15 @@ The low-DO region in Case C is localised rather than tank-wide.
 | Case B – Central | **11.36 mg/L** |
 | Case C – Lateral | **11.66 mg/L** |
 
-### Case A – Distributed Diffuser Rows
+### Steady-state reduced ASM1 DO field — Case A – Distributed Diffuser Rows
 
 ![Case A dissolved oxygen](figures/biological_response/dissolved_oxygen_caseA.png)
 
-### Case B – Central Diffuser Rows
+### Steady-state reduced ASM1 DO field — Case B – Central Diffuser Bank
 
 ![Case B dissolved oxygen](figures/biological_response/dissolved_oxygen_caseB.png)
 
-### Case C – Lateral Diffuser Rows
+### Steady-state reduced ASM1 DO field — Case C – Lateral Diffuser Banks
 
 ![Case C dissolved oxygen](figures/biological_response/dissolved_oxygen_caseC.png)
 
@@ -430,7 +456,9 @@ Case C produces the greatest spatial variation.
 | Case B – Central | **97.43%** |
 | Case C – Lateral | **98.33%** |
 
-Case C gives the lowest outlet biodegradable substrate concentration.
+The final reduced ASM1 biodegradable-substrate reductions are all very similar. The small differences do not indicate a major change in overall biological removal efficiency between diffuser layouts.
+
+Case C gives the lowest outlet biodegradable substrate concentration, but only by a small margin.
 
 Case A remains close to Case C while maintaining a more uniform dissolved oxygen field.
 
@@ -438,11 +466,11 @@ Case A remains close to Case C while maintaining a more uniform dissolved oxygen
 
 ![Case A biodegradable substrate COD](figures/biological_response/substrate_cod_caseA.png)
 
-### Case B – Central Diffuser Rows
+### Case B – Central Diffuser Bank
 
 ![Case B biodegradable substrate COD](figures/biological_response/substrate_cod_caseB.png)
 
-### Case C – Lateral Diffuser Rows
+### Case C – Lateral Diffuser Banks
 
 ![Case C biodegradable substrate COD](figures/biological_response/substrate_cod_caseC.png)
 
@@ -459,12 +487,12 @@ It produces:
 - the highest mean dissolved oxygen
 - the most uniform dissolved oxygen field
 - no liquid volume below 4 mg/L DO
-- the highest integrated oxygen-transfer rate
+- the highest integrated net oxygen-transfer rate
 - broad gas distribution
 - distributed water circulation
 - strong biodegradable substrate removal
 
-### Case B – Central Diffuser Rows
+### Case B – Central Diffuser Bank
 
 Case B produces a more concentrated circulation and gas-distribution pattern.
 
@@ -476,7 +504,7 @@ It gives:
 - lower mean DO than Case A
 - the highest outlet biodegradable substrate concentration
 
-### Case C – Lateral Diffuser Rows
+### Case C – Lateral Diffuser Banks
 
 Case C produces strong circulation close to the lateral diffuser regions.
 
@@ -484,11 +512,11 @@ It gives:
 
 - the highest local mean water velocity
 - the lowest outlet biodegradable substrate COD
-- the highest calculated biodegradable substrate removal
+- the highest calculated biodegradable substrate removal, by a small margin
 - the lowest mean dissolved oxygen
 - the greatest DO variation
 - the greatest substrate variation
-- a small localised region below 4 mg/L DO
+- a small region below 4 mg/L DO associated mainly with the axial inlet-to-downstream gradient
 
 ---
 
@@ -509,6 +537,8 @@ Case A provides the most balanced overall performance because the distributed di
 Case B performs well in bulk substrate uniformity but concentrates the main aeration and circulation path.
 
 Case C gives the best outlet substrate result but produces the largest spatial variation inside the tank.
+
+Overall, the diffuser layout has a stronger effect on internal DO uniformity, substrate distribution, and local treatment conditions than on bulk biodegradable-substrate reduction, which remains similar across all three cases.
 
 ---
 
