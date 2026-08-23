@@ -171,35 +171,35 @@ The conservative-flux construction requires boundary patches named
 
 Aerobic reaction rates use the ASM1 Monod oxygen limitation:
 
-\[
+$$
 f_O =
 \frac{S_O}
 {K_{OH}+S_O}
-\]
+$$
 
 
 ### 7.2 Substrate limitation
 
 Heterotrophic growth uses
 
-\[
+$$
 f_S =
 \frac{S_S}
 {K_S+S_S}.
-\]
+$$
 
 
 ### 7.3 Aerobic heterotrophic growth
 
 The retained heterotrophic growth rate is
 
-\[
+$$
 \rho_H =
 \mu_H
 \frac{S_S}{K_S+S_S}
 \frac{S_O}{K_{OH}+S_O}
 X_{BH}.
-\]
+$$
 
 `XBH` is a prescribed retained biomass concentration rather than a
 dynamically solved biomass inventory.
@@ -209,22 +209,22 @@ dynamically solved biomass inventory.
 
 The corresponding consumption of `SS` is
 
-\[
+$$
 r_{SS,\mathrm{growth}}
 =
 \frac{1}{Y_H}\rho_H.
-\]
+$$
 
 
 ### 7.5 Heterotrophic oxygen consumption
 
 The oxygen requirement associated with aerobic heterotrophic growth is
 
-\[
+$$
 r_{O_2,H}
 =
 \frac{1-Y_H}{Y_H}\rho_H.
-\]
+$$
 
 This is the ASM1 aerobic heterotrophic-growth oxygen stoichiometry.
 
@@ -233,7 +233,7 @@ This is the ASM1 aerobic heterotrophic-growth oxygen stoichiometry.
 
 The retained aerobic hydrolysis rate is
 
-\[
+$$
 \rho_{\mathrm{hyd}}
 =
 k_h
@@ -241,16 +241,16 @@ k_h
 X_{BH}
 \frac{S_X}
 {K_X X_{BH}+S_X}.
-\]
+$$
 
 Hydrolysis converts slowly biodegradable substrate `XS` into readily
 biodegradable substrate `SS` on a COD basis.
 
 Therefore:
 
-\[
+$$
 XS \rightarrow SS
-\]
+$$
 
 without creating or destroying biodegradable COD through the
 hydrolysis conversion itself.
@@ -260,7 +260,7 @@ hydrolysis conversion itself.
 
 The actively solved scalar equations have the general steady form
 
-\[
+$$
 \nabla\cdot
 \left(
 \alpha\Phi_{\mathrm{bio}} C
@@ -272,38 +272,38 @@ The actively solved scalar equations have the general steady form
 \right)
 =
 R_C.
-\]
+$$
 
 For soluble fields:
 
-\[
+$$
 D_{\mathrm{eff,sol}}
 =
 D_{m,\mathrm{sol}}
 +
 \frac{\nu_{t,w}^{\,mean}}{Sc_T}.
-\]
+$$
 
 For particulate/suspended fields:
 
-\[
+$$
 D_{\mathrm{eff,part}}
 =
 D_{m,\mathrm{part}}
 +
 \frac{\nu_{t,w}^{\,mean}}{Sc_T}.
-\]
+$$
 
 
 ### 8.1 Slowly biodegradable substrate
 
 `XS` is transported and removed by aerobic hydrolysis:
 
-\[
+$$
 R_{XS}
 =
 -\alpha_w\rho_{\mathrm{hyd}}.
-\]
+$$
 
 
 ### 8.2 Readily biodegradable substrate
@@ -311,7 +311,7 @@ R_{XS}
 `SS` receives hydrolysed substrate and is consumed by heterotrophic
 growth:
 
-\[
+$$
 R_{SS}
 =
 \alpha_w
@@ -320,7 +320,7 @@ R_{SS}
 -
 \frac{\rho_H}{Y_H}
 \right).
-\]
+$$
 
 
 ### 8.3 Dissolved oxygen
@@ -328,7 +328,7 @@ R_{SS}
 The dissolved-oxygen equation contains both biological oxygen
 consumption and bubble-mediated oxygen transfer:
 
-\[
+$$
 R_{SO}
 =
 k_La_{\mathrm{bio}}
@@ -339,9 +339,9 @@ S_O^*-S_O
 \alpha_w
 \frac{1-Y_H}{Y_H}
 \rho_H.
-\]
+$$
 
-Here `DOsatLocalMean` provides \(S_O^*\), while
+Here `DOsatLocalMean` provides $S_O^*$, while
 `oxygenTransferCoeffBio` supplies the local time-averaged
 bubble-transfer coefficient.
 
@@ -370,12 +370,12 @@ The current biological parameter file contains:
 
 | Parameter | Value | Units | Role |
 |---|---:|---|---|
-| `DmSoluble` | \(1.0\times10^{-9}\) | m²/s | Soluble molecular diffusivity |
-| `DmParticulate` | \(1.0\times10^{-12}\) | m²/s | Small particulate diffusivity |
+| `DmSoluble` | $1.0\times10^{-9}$ | m²/s | Soluble molecular diffusivity |
+| `DmParticulate` | $1.0\times10^{-12}$ | m²/s | Small particulate diffusivity |
 | `ScT` | 0.70 | – | Turbulent Schmidt number |
-| `muH` | \(3.89568\times10^{-5}\) | s⁻¹ | Heterotrophic growth rate |
-| `bH` | \(2.72241\times10^{-6}\) | s⁻¹ | Decay parameter, inactive |
-| `kh` | \(3.11242\times10^{-5}\) | s⁻¹ | Hydrolysis rate |
+| `muH` | $3.89568\times10^{-5}$ | s⁻¹ | Heterotrophic growth rate |
+| `bH` | $2.72241\times10^{-6}$ | s⁻¹ | Decay parameter, inactive |
+| `kh` | $3.11242\times10^{-5}$ | s⁻¹ | Hydrolysis rate |
 | `KS` | 0.010 | kg COD/m³ | Substrate half-saturation |
 | `KOH` | 0.0002 | kg O₂/m³ | Oxygen half-saturation |
 | `KX` | 0.10 | – | Hydrolysis saturation coefficient |
@@ -402,9 +402,9 @@ specific treatment plant.
 
 The retained heterotrophic biomass concentration is prescribed as
 
-\[
+$$
 X_{BH}=2.55\ {\rm kg\,COD\,m^{-3}}
-\]
+$$
 
 for the current simulations.
 
@@ -425,9 +425,9 @@ The solver writes the following COD quantities.
 
 ### Biodegradable substrate COD
 
-\[
+$$
 \texttt{substrateCOD}=S_S+X_S
-\]
+$$
 
 This is the biodegradable-substrate diagnostic used in the
 diffuser-layout comparison.
@@ -435,18 +435,18 @@ diffuser-layout comparison.
 
 ### Soluble COD
 
-\[
+$$
 \texttt{solubleCOD}=S_I+S_S.
-\]
+$$
 
 
 ### Mixed-liquor COD
 
-\[
+$$
 \texttt{mixedLiquorCOD}
 =
 S_I+S_S+X_I+X_S+X_{BH}+X_P.
-\]
+$$
 
 `mixedLiquorCOD` must not be interpreted as final plant effluent COD.
 
@@ -584,22 +584,22 @@ volumetric flow to the reported numerical precision.
 
 Using the production tolerance of
 
-\[
+$$
 10^{-6},
-\]
+$$
 
 Case A converged after 13 nonlinear correctors.
 
 The final maximum relative change was
 
-\[
+$$
 4.19\times10^{-7},
-\]
+$$
 
 below the prescribed convergence criterion.
 
 The individual scalar linear solves reached residuals of approximately
-\(10^{-10}\).
+$10^{-10}$.
 
 
 ### 15.5 Tolerance-sensitivity check
@@ -607,28 +607,28 @@ The individual scalar linear solves reached residuals of approximately
 The Case A biological calculation was repeated after tightening the
 nonlinear criterion from
 
-\[
+$$
 10^{-6}
-\]
+$$
 
 to
 
-\[
+$$
 10^{-8}.
-\]
+$$
 
 The tighter solution required 16 rather than 13 nonlinear correctors.
 
 The flow-weighted outlet values were unchanged at the reported
 precision:
 
-| Variable | Tolerance \(10^{-6}\) | Tolerance \(10^{-8}\) |
+| Variable | Tolerance $10^{-6}$ | Tolerance $10^{-8}$ |
 |---|---:|---:|
 | `SS` | 0.00010643137 | 0.00010643137 |
 | `XS` | 0.0050102029 | 0.0050102029 |
 | `SO` | 0.011892771 | 0.011892771 |
 
-The production tolerance of \(10^{-6}\) is therefore adequate for the
+The production tolerance of $10^{-6}$ is therefore adequate for the
 reported outlet quantities.
 
 
@@ -679,7 +679,7 @@ complete closed oxygen mass balance.
 | Positive converged scalar fields | PASS |
 | Conservative projected hydraulic flux | PASS |
 | Nonlinear convergence | PASS |
-| \(10^{-6}\) to \(10^{-8}\) tolerance sensitivity | PASS |
+| $10^{-6}$ to $10^{-8}$ tolerance sensitivity | PASS |
 | Advective/source oxygen-budget consistency | CONSISTENT, ~0.88% residual before explicit boundary diffusion |
 
 
