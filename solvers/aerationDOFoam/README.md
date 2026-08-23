@@ -20,36 +20,36 @@ It models physical aeration only. Biological substrate consumption and biologica
 
 The conservative liquid-phase DO equation is
 
-$$
+```math
 \frac{\partial(\alpha_w C_O)}{\partial t}
 + \nabla\cdot(\alpha\Phi_w C_O)
 - \nabla\cdot(\alpha_w D_{\mathrm{eff}}\nabla C_O)
 = \alpha_w k_La(C_O^* - C_O),
-$$
+```
 
 where $\alpha_w$ is the instantaneous water volume fraction, $C_O$ is DO concentration, $\alpha\Phi_w$ is the conservative water-phase flux, and $C_O^*$ is the local saturation concentration.
 
 The effective diffusivity is
 
-$$
+```math
 D_{\mathrm{eff}} = D_{m,O_2} + \frac{\nu_{t,w}}{Sc_T}.
-$$
+```
 
 For monodisperse spherical bubbles, the solver evaluates
 
-$$
+```math
 a = \frac{6\alpha_g}{d_b\alpha_w},
 \qquad
 k_L = 2\sqrt{\frac{D_{m,O_2}|U_g - U_w|}{\pi d_b}},
 \qquad
 \left(k_La\right)_{\mathrm{wastewater}} = \alpha_{\mathrm{factor}} k_L a.
-$$
+```
 
 The local saturation concentration is pressure dependent:
 
-$$
+```math
 C_O^* = \beta C_{O,\mathrm{ref}}^*\frac{p}{p_{\mathrm{ref}}}.
-$$
+```
 
 Consequently, the reference surface saturation value is not a uniform upper limit throughout the tank.
 

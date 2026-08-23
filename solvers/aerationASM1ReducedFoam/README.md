@@ -171,35 +171,35 @@ The conservative-flux construction requires boundary patches named
 
 Aerobic reaction rates use the ASM1 Monod oxygen limitation:
 
-$$
+```math
 f_O =
 \frac{S_O}
 {K_{OH}+S_O}
-$$
+```
 
 
 ### 7.2 Substrate limitation
 
 Heterotrophic growth uses
 
-$$
+```math
 f_S =
 \frac{S_S}
 {K_S + S_S}.
-$$
+```
 
 
 ### 7.3 Aerobic heterotrophic growth
 
 The retained heterotrophic growth rate is
 
-$$
+```math
 \rho_H =
 \mu_H
 \frac{S_S}{K_S + S_S}
 \frac{S_O}{K_{OH} + S_O}
 X_{BH}.
-$$
+```
 
 `XBH` is a prescribed retained biomass concentration rather than a
 dynamically solved biomass inventory.
@@ -209,22 +209,22 @@ dynamically solved biomass inventory.
 
 The corresponding consumption of `SS` is
 
-$$
+```math
 r_{SS,\mathrm{growth}}
 =
 \frac{1}{Y_H}\rho_H.
-$$
+```
 
 
 ### 7.5 Heterotrophic oxygen consumption
 
 The oxygen requirement associated with aerobic heterotrophic growth is
 
-$$
+```math
 r_{O_2,H}
 =
 \frac{1-Y_H}{Y_H}\rho_H.
-$$
+```
 
 This is the ASM1 aerobic heterotrophic-growth oxygen stoichiometry.
 
@@ -233,7 +233,7 @@ This is the ASM1 aerobic heterotrophic-growth oxygen stoichiometry.
 
 The retained aerobic hydrolysis rate is
 
-$$
+```math
 \rho_{\mathrm{hyd}}
 =
 k_h
@@ -241,16 +241,16 @@ k_h
 X_{BH}
 \frac{S_X}
 {K_X X_{BH} + S_X}.
-$$
+```
 
 Hydrolysis converts slowly biodegradable substrate `XS` into readily
 biodegradable substrate `SS` on a COD basis.
 
 Therefore:
 
-$$
+```math
 XS \rightarrow SS
-$$
+```
 
 without creating or destroying biodegradable COD through the
 hydrolysis conversion itself.
@@ -260,7 +260,7 @@ hydrolysis conversion itself.
 
 The actively solved scalar equations have the general steady form
 
-$$
+```math
 \nabla\cdot
 \left(
 \alpha\Phi_{\mathrm{bio}} C
@@ -272,38 +272,38 @@ $$
 \right)
 =
 R_C.
-$$
+```
 
 For soluble fields:
 
-$$
+```math
 D_{\mathrm{eff,sol}}
 =
 D_{m,\mathrm{sol}}
 +
 \frac{\nu_{t,w}^{\mathrm{mean}}}{Sc_T}.
-$$
+```
 
 For particulate/suspended fields:
 
-$$
+```math
 D_{\mathrm{eff,part}}
 =
 D_{m,\mathrm{part}}
 +
 \frac{\nu_{t,w}^{\mathrm{mean}}}{Sc_T}.
-$$
+```
 
 
 ### 8.1 Slowly biodegradable substrate
 
 `XS` is transported and removed by aerobic hydrolysis:
 
-$$
+```math
 R_{XS}
 =
 -\alpha_w\rho_{\mathrm{hyd}}.
-$$
+```
 
 
 ### 8.2 Readily biodegradable substrate
@@ -311,7 +311,7 @@ $$
 `SS` receives hydrolysed substrate and is consumed by heterotrophic
 growth:
 
-$$
+```math
 R_{SS}
 =
 \alpha_w
@@ -320,7 +320,7 @@ R_{SS}
 -
 \frac{\rho_H}{Y_H}
 \right).
-$$
+```
 
 
 ### 8.3 Dissolved oxygen
@@ -328,7 +328,7 @@ $$
 The dissolved-oxygen equation contains both biological oxygen
 consumption and bubble-mediated oxygen transfer:
 
-$$
+```math
 R_{SO}
 =
 k_La_{\mathrm{bio}}
@@ -339,7 +339,7 @@ S_O^* - S_O
 \alpha_w
 \frac{1-Y_H}{Y_H}
 \rho_H.
-$$
+```
 
 Here `DOsatLocalMean` provides $S_O^*$, while
 `oxygenTransferCoeffBio` supplies the local time-averaged
@@ -402,9 +402,9 @@ specific treatment plant.
 
 The retained heterotrophic biomass concentration is prescribed as
 
-$$
+```math
 X_{BH} = 2.55\ \mathrm{kg\,COD\,m^{-3}}
-$$
+```
 
 for the current simulations.
 
@@ -425,9 +425,9 @@ The solver writes the following COD quantities.
 
 ### Biodegradable substrate COD
 
-$$
+```math
 \mathrm{substrateCOD} = S_S + X_S
-$$
+```
 
 This is the biodegradable-substrate diagnostic used in the
 diffuser-layout comparison.
@@ -435,18 +435,18 @@ diffuser-layout comparison.
 
 ### Soluble COD
 
-$$
+```math
 \mathrm{solubleCOD} = S_I + S_S.
-$$
+```
 
 
 ### Mixed-liquor COD
 
-$$
+```math
 \mathrm{mixedLiquorCOD}
 =
 S_I + S_S + X_I + X_S + X_{BH} + X_P.
-$$
+```
 
 `mixedLiquorCOD` must not be interpreted as final plant effluent COD.
 
@@ -584,17 +584,17 @@ volumetric flow to the reported numerical precision.
 
 Using the production tolerance of
 
-$$
+```math
 10^{-6},
-$$
+```
 
 Case A converged after 13 nonlinear correctors.
 
 The final maximum relative change was
 
-$$
+```math
 4.19\times10^{-7},
-$$
+```
 
 below the prescribed convergence criterion.
 
@@ -607,15 +607,15 @@ $10^{-10}$.
 The Case A biological calculation was repeated after tightening the
 nonlinear criterion from
 
-$$
+```math
 10^{-6}
-$$
+```
 
 to
 
-$$
+```math
 10^{-8}.
-$$
+```
 
 The tighter solution required 16 rather than 13 nonlinear correctors.
 
