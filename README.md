@@ -195,6 +195,26 @@ Direct free-surface reaeration is not included.
 
 # Results
 
+## Summary plots
+
+The following plots complement the contour-field results with direct comparisons of the three diffuser layouts. In these plots, Case A is consistently labelled **Distributed (A)**.
+
+The mean oxygen-transfer coefficient and mean gas holdup summarize the developed aeration period from **180–300 s**. Case A has the highest mean `kLa` and mean gas holdup, while the contour fields below show how these aeration quantities are distributed through the tank.
+
+![Mean oxygen-transfer coefficient comparison](figures/oxygen_transfer/01_kLa_comparison.png)
+
+![Mean gas holdup comparison](figures/hydrodynamics/03_gas_holdup_comparison.png)
+
+The outlet dissolved-oxygen and biodegradable-substrate-COD plots summarize the final reduced-ASM1 response. The dashed line in the DO plot is an approximate **reference surface saturation DO at 12 °C (≈ 10.8 mg/L)**; it is not the spatially varying `DOsatLocalMean` field used by the model.
+
+![Flow-weighted outlet dissolved oxygen comparison](figures/biological_response/04_outlet_DO_comparison.png)
+
+![Flow-weighted outlet biodegradable substrate COD comparison](figures/biological_response/03_outlet_biodegradable_COD.png)
+
+The three outlet DO values are all high and fairly similar. Biodegradable substrate reduction is also very similar across the layouts: **98.12%** for Distributed (A), **97.43%** for Central (B), and **98.33%** for Lateral (C). Overall, diffuser layout affects the **spatial distribution of aeration, DO, and substrate more strongly than the final bulk biodegradable-substrate removal percentage**.
+
+---
+
 ## Mean air volume fraction
 
 Field:
