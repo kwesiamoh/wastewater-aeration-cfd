@@ -23,8 +23,8 @@ The conservative liquid-phase DO equation is
 $$
 \frac{\partial(\alpha_w C_O)}{\partial t}
 + \nabla\cdot(\alpha\Phi_w C_O)
-- \nabla\cdot(\alpha_w D_\mathrm{eff}\nabla C_O)
-= \alpha_w k_La(C_O^*-C_O),
+- \nabla\cdot(\alpha_w D_{\mathrm{eff}}\nabla C_O)
+= \alpha_w k_La(C_O^* - C_O),
 $$
 
 where $\alpha_w$ is the instantaneous water volume fraction, $C_O$ is DO concentration, $\alpha\Phi_w$ is the conservative water-phase flux, and $C_O^*$ is the local saturation concentration.
@@ -32,23 +32,23 @@ where $\alpha_w$ is the instantaneous water volume fraction, $C_O$ is DO concent
 The effective diffusivity is
 
 $$
-D_\mathrm{eff}=D_{m,O_2}+\frac{\nu_{t,w}}{Sc_T}.
+D_{\mathrm{eff}} = D_{m,O_2} + \frac{\nu_{t,w}}{Sc_T}.
 $$
 
 For monodisperse spherical bubbles, the solver evaluates
 
 $$
-a=\frac{6\alpha_g}{d_b\alpha_w},
+a = \frac{6\alpha_g}{d_b\alpha_w},
 \qquad
-k_L=2\sqrt{\frac{D_{m,O_2}|U_g-U_w|}{\pi d_b}},
+k_L = 2\sqrt{\frac{D_{m,O_2}|U_g - U_w|}{\pi d_b}},
 \qquad
-(k_La)_\mathrm{wastewater}=\alpha_\mathrm{factor}k_L a.
+\left(k_La\right)_{\mathrm{wastewater}} = \alpha_{\mathrm{factor}} k_L a.
 $$
 
 The local saturation concentration is pressure dependent:
 
 $$
-C_O^*=\beta C_{O,\mathrm{ref}}^*\frac{p}{p_\mathrm{ref}}.
+C_O^* = \beta C_{O,\mathrm{ref}}^*\frac{p}{p_{\mathrm{ref}}}.
 $$
 
 Consequently, the reference surface saturation value is not a uniform upper limit throughout the tank.

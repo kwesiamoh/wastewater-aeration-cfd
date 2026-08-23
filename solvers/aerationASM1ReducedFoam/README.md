@@ -185,7 +185,7 @@ Heterotrophic growth uses
 $$
 f_S =
 \frac{S_S}
-{K_S+S_S}.
+{K_S + S_S}.
 $$
 
 
@@ -196,8 +196,8 @@ The retained heterotrophic growth rate is
 $$
 \rho_H =
 \mu_H
-\frac{S_S}{K_S+S_S}
-\frac{S_O}{K_{OH}+S_O}
+\frac{S_S}{K_S + S_S}
+\frac{S_O}{K_{OH} + S_O}
 X_{BH}.
 $$
 
@@ -237,10 +237,10 @@ $$
 \rho_{\mathrm{hyd}}
 =
 k_h
-\frac{S_O}{K_{OH}+S_O}
+\frac{S_O}{K_{OH} + S_O}
 X_{BH}
 \frac{S_X}
-{K_X X_{BH}+S_X}.
+{K_X X_{BH} + S_X}.
 $$
 
 Hydrolysis converts slowly biodegradable substrate `XS` into readily
@@ -281,7 +281,7 @@ D_{\mathrm{eff,sol}}
 =
 D_{m,\mathrm{sol}}
 +
-\frac{\nu_{t,w}^{\,mean}}{Sc_T}.
+\frac{\nu_{t,w}^{\mathrm{mean}}}{Sc_T}.
 $$
 
 For particulate/suspended fields:
@@ -291,7 +291,7 @@ D_{\mathrm{eff,part}}
 =
 D_{m,\mathrm{part}}
 +
-\frac{\nu_{t,w}^{\,mean}}{Sc_T}.
+\frac{\nu_{t,w}^{\mathrm{mean}}}{Sc_T}.
 $$
 
 
@@ -333,7 +333,7 @@ R_{SO}
 =
 k_La_{\mathrm{bio}}
 \left(
-S_O^*-S_O
+S_O^* - S_O
 \right)
 -
 \alpha_w
@@ -403,7 +403,7 @@ specific treatment plant.
 The retained heterotrophic biomass concentration is prescribed as
 
 $$
-X_{BH}=2.55\ {\rm kg\,COD\,m^{-3}}
+X_{BH} = 2.55\ \mathrm{kg\,COD\,m^{-3}}
 $$
 
 for the current simulations.
@@ -426,7 +426,7 @@ The solver writes the following COD quantities.
 ### Biodegradable substrate COD
 
 $$
-\texttt{substrateCOD}=S_S+X_S
+\mathrm{substrateCOD} = S_S + X_S
 $$
 
 This is the biodegradable-substrate diagnostic used in the
@@ -436,16 +436,16 @@ diffuser-layout comparison.
 ### Soluble COD
 
 $$
-\texttt{solubleCOD}=S_I+S_S.
+\mathrm{solubleCOD} = S_I + S_S.
 $$
 
 
 ### Mixed-liquor COD
 
 $$
-\texttt{mixedLiquorCOD}
+\mathrm{mixedLiquorCOD}
 =
-S_I+S_S+X_I+X_S+X_{BH}+X_P.
+S_I + S_S + X_I + X_S + X_{BH} + X_P.
 $$
 
 `mixedLiquorCOD` must not be interpreted as final plant effluent COD.
