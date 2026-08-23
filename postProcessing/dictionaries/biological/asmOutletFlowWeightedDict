@@ -1,0 +1,52 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      asmOutletFlowWeightedDict;
+}
+
+functions
+{
+    loadFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            alphaPhiBio
+            SS
+            XS
+            SO
+            substrateCOD
+            solubleCOD
+        );
+    }
+
+    outletFlowWeighted
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+
+        regionType      patch;
+        name            outlet;
+
+        operation       weightedAverage;
+        weightField     alphaPhiBio;
+
+        fields
+        (
+            SS
+            XS
+            SO
+            substrateCOD
+            solubleCOD
+        );
+
+        writeFields     false;
+        writeArea       false;
+        writeToFile     true;
+        log             true;
+    }
+}

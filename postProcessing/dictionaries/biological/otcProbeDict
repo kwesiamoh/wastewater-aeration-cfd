@@ -1,0 +1,48 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      otcProbeDict;
+}
+
+functions
+{
+    loadFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            alpha.waterMean
+            oxygenTransferCoeffPostMean
+            DOMean
+            DOsatLocalMean
+        );
+    }
+
+    otcVerticalProbe
+    {
+        type            probes;
+        libs            (sampling);
+
+        fields
+        (
+            alpha.waterMean
+            oxygenTransferCoeffPostMean
+            DOMean
+            DOsatLocalMean
+        );
+
+        probeLocations
+        (
+            (37.625 4.875 5.0775)
+            (37.625 4.875 4.9725)
+            (37.625 4.875 4.7500)
+            (37.625 4.875 4.5000)
+            (37.625 4.875 4.0000)
+            (37.625 4.875 3.0000)
+        );
+    }
+}

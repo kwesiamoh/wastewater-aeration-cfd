@@ -1,0 +1,55 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM                                       |
+|  \\    /   O peration     | Version:  v2412                                |
+|   \\  /    A nd           |                                                 |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      transportMeanFieldsDict;
+}
+
+functions
+{
+    readTransportFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            alphaUwater
+            alpha.water
+        );
+    }
+
+    transportFieldMeans
+    {
+        type            fieldAverage;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            alphaUwater
+            {
+                mean        yes;
+                prime2Mean  no;
+                base        iteration;
+            }
+
+            alpha.water
+            {
+                mean        yes;
+                prime2Mean  no;
+                base        iteration;
+            }
+        );
+    }
+}
+
+// ************************************************************************* //

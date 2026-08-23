@@ -1,0 +1,128 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      performanceMetricsDict;
+}
+
+functions
+{
+    loadFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            alpha.waterMean
+            SO
+            substrateCOD
+            solubleCOD
+        );
+    }
+
+
+    totalLiquidVolume
+    {
+        type            volFieldValue;
+        libs            (fieldFunctionObjects);
+
+        regionType      all;
+        operation       volIntegrate;
+
+        fields
+        (
+            alpha.waterMean
+        );
+
+        writeFields     false;
+        writeToFile     true;
+        log             true;
+    }
+
+
+    liquidAverages
+    {
+        type            volFieldValue;
+        libs            (fieldFunctionObjects);
+
+        regionType      all;
+        operation       weightedVolAverage;
+        weightField     alpha.waterMean;
+
+        fields
+        (
+            SO
+            substrateCOD
+            solubleCOD
+        );
+
+        writeFields     false;
+        writeToFile     true;
+        log             true;
+    }
+
+
+    lowDO2LiquidVolume
+    {
+        type            volFieldValue;
+        libs            (fieldFunctionObjects);
+
+        regionType      cellSet;
+        name            lowDO2;
+
+        operation       volIntegrate;
+
+        fields
+        (
+            alpha.waterMean
+        );
+
+        writeFields     false;
+        writeToFile     true;
+        log             true;
+    }
+
+
+    lowDO4LiquidVolume
+    {
+        type            volFieldValue;
+        libs            (fieldFunctionObjects);
+
+        regionType      cellSet;
+        name            lowDO4;
+
+        operation       volIntegrate;
+
+        fields
+        (
+            alpha.waterMean
+        );
+
+        writeFields     false;
+        writeToFile     true;
+        log             true;
+    }
+
+
+    highSubstrate20LiquidVolume
+    {
+        type            volFieldValue;
+        libs            (fieldFunctionObjects);
+
+        regionType      cellSet;
+        name            highSubstrate20;
+
+        operation       volIntegrate;
+
+        fields
+        (
+            alpha.waterMean
+        );
+
+        writeFields     false;
+        writeToFile     true;
+        log             true;
+    }
+}

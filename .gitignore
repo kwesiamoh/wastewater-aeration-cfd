@@ -16,7 +16,8 @@ log.*
 *.pvtu
 
 # Generated post-processing
-**/postProcessing/
+cases/**/postProcessing/
+/postProcessing/*.csv
 **/VTK/
 
 # Backup / archive material

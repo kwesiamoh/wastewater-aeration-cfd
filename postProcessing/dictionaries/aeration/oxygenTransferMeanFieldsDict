@@ -1,0 +1,53 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      oxygenTransferMeanFieldsDict;
+}
+
+functions
+{
+    loadOxygenTransferFields
+    {
+        type            readFields;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            kLa
+            DOsatLocal
+            nut.water
+        );
+    }
+
+    oxygenTransferFieldMeans
+    {
+        type            fieldAverage;
+        libs            (fieldFunctionObjects);
+
+        fields
+        (
+            kLa
+            {
+                mean            yes;
+                prime2Mean      no;
+                base            iteration;
+            }
+
+            DOsatLocal
+            {
+                mean            yes;
+                prime2Mean      no;
+                base            iteration;
+            }
+
+            nut.water
+            {
+                mean            yes;
+                prime2Mean      no;
+                base            iteration;
+            }
+        );
+    }
+}
