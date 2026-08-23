@@ -56,6 +56,8 @@ The project was completed in two main stages.
 
 A custom OpenFOAM solver, `aerationDOFoam`, was developed for the aeration stage.
 
+Detailed governing equations, implementation notes, verification steps, assumptions, and scientific references are documented in [`solvers/aerationDOFoam/README.md`](solvers/aerationDOFoam/README.md).
+
 The solver extends the multiphase air–water calculation with dissolved-oxygen transport and oxygen-transfer calculations.
 
 The first stage resolves:
@@ -94,11 +96,13 @@ A short transient animation was produced to show how the air phase develops afte
 
 A second custom OpenFOAM solver, `aerationASM1ReducedFoam`, was developed for the biological stage.
 
+Detailed reduced-ASM1 equations, model assumptions, verification results, and scientific references are documented in [`solvers/aerationASM1ReducedFoam/README.md`](solvers/aerationASM1ReducedFoam/README.md).
+
 The biological model uses the established frozen, time-averaged hydrodynamic and oxygen-transfer fields from the aeration simulation instead of rerunning the full multiphase CFD.
 
 The model is based on the aerobic carbon-removal part of ASM1.
 
-The main model variables are:
+The main reduced-model variables represented in the case files are:
 
 | Field | Description |
 |---|---|
@@ -110,6 +114,8 @@ The main model variables are:
 | `XP` | Particulate products |
 | `SO` | Dissolved oxygen |
 
+`SS`, `XS`, and `SO` are actively solved in the reduced biological stage. `XBH` is prescribed, while the remaining COD fractions are retained for model accounting and diagnostics.
+
 The model includes:
 
 - aerobic heterotrophic growth
@@ -120,8 +126,6 @@ The model includes:
 - turbulent and molecular scalar transport
 
 The heterotrophic biomass concentration is prescribed because the CFD domain does not contain a secondary clarifier, return activated sludge loop, or waste activated sludge system.
-
-The model therefore represents aerobic carbon removal inside the aeration tank rather than a complete activated-sludge plant.
 
 The earlier simplified BioCOD calculations are superseded development results and are not mixed with the final reduced ASM1 results reported below.
 
@@ -261,8 +265,6 @@ Maximum mean water velocity:
 Case C produces the highest local velocity.
 
 Case A produces a more distributed circulation field.
-
-The results show that maximum velocity alone is not enough to judge mixing quality.
 
 ### Case A – Distributed Diffuser Rows
 
@@ -500,9 +502,7 @@ Case A remains close to Case C while maintaining a more uniform dissolved oxygen
 
 ### Case A – Distributed Diffuser Rows
 
-Case A gives the strongest overall balance between aeration, oxygen distribution, and biological treatment.
-
-It produces:
+Reported metrics and field patterns:
 
 - the highest mean dissolved oxygen
 - the most uniform dissolved oxygen field
@@ -510,27 +510,24 @@ It produces:
 - the highest integrated net oxygen-transfer rate
 - broad gas distribution
 - distributed water circulation
-- strong biodegradable substrate removal
+- 98.12% biodegradable-substrate reduction
 
 ### Case B – Central Diffuser Bank
 
-Case B produces a more concentrated circulation and gas-distribution pattern.
-
-It gives:
+Reported metrics and field patterns:
 
 - the highest local oxygen-transfer coefficient
-- good bulk substrate uniformity
+- the lowest substrate coefficient of variation
 - the lowest fraction of tank volume above 20 mg/L substrate COD
 - lower mean DO than Case A
 - the highest outlet biodegradable substrate concentration
 
 ### Case C – Lateral Diffuser Banks
 
-Case C produces strong circulation close to the lateral diffuser regions.
-
-It gives:
+Reported metrics and field patterns:
 
 - the highest local mean water velocity
+- circulation concentrated near the lateral diffuser regions
 - the lowest outlet biodegradable substrate COD
 - the highest calculated biodegradable substrate removal, by a small margin
 - the lowest mean dissolved oxygen
@@ -542,21 +539,7 @@ It gives:
 
 ## Main finding
 
-The simulations show that diffuser layout changes more than the maximum velocity or maximum oxygen-transfer coefficient.
-
-The diffuser arrangement changes:
-
-- where the gas phase travels
-- how the water circulates
-- where oxygen transfer occurs
-- how uniform the dissolved oxygen field becomes
-- where biodegradable substrate remains in the tank
-
-Case A provides the most balanced overall performance because the distributed diffuser layout produces broad gas coverage and the most uniform dissolved oxygen field while maintaining strong substrate removal.
-
-Case B performs well in bulk substrate uniformity but concentrates the main aeration and circulation path.
-
-Case C gives the best outlet substrate result but produces the largest spatial variation inside the tank.
+Among the metrics considered, Case A provides the most balanced performance. The distributed layout produces the highest mean DO and the most uniform DO field while maintaining biodegradable-substrate removal comparable with Cases B and C.
 
 Overall, the diffuser layout has a stronger effect on internal DO uniformity, substrate distribution, and local treatment conditions than on bulk biodegradable-substrate reduction, which remains similar across all three cases.
 
@@ -570,8 +553,8 @@ The project includes:
 - solver convergence checks
 - time averaging of multiphase fields
 - conservative biological flux correction
-- oxygen-transfer balance checks
-- oxygen-consumption checks
+- advective/source oxygen-budget consistency check
+- integrated biological oxygen-consumption checks
 - volume-weighted performance metrics
 - outlet flux-weighted concentrations
 - DO uniformity calculations
