@@ -114,7 +114,7 @@ which aerationDOFoam
 ## Assumptions and limitations
 
 - A single effective bubble diameter is used; breakup, coalescence, and bubble-size distributions are not solved.
-- `alphaFactor` and `betaFactor` are prescribed modelling inputs rather than site-calibrated measurements.
+- `alphaFactor` and `betaFactor` are prescribed modelling inputs without site-specific calibration.
 - Direct atmospheric free-surface reaeration is not included.
 - The transient solver retains the dispersed-bubble interfacial-area expression near the resolved atmosphere interface with a numerical lower bound on water volume fraction. Atmosphere-adjacent bubble-transfer contributions are removed when preparing the Stage 2 coupling field.
 
@@ -130,7 +130,7 @@ The implementation has been checked for:
 - agreement with the expected first-order oxygen-transfer behavior; and
 - positivity and physically consistent ranges in the production DO field.
 
-These checks constitute mathematical and numerical verification of the implemented model. They do not constitute experimental validation of this tank geometry, operating condition, or parameter set.
+These checks cover mathematical and numerical verification of the implemented model.
 
 ## References
 

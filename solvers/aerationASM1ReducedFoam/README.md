@@ -29,8 +29,7 @@ aerationASM1ReducedFoam
 steady spatial distributions of SS, XS and SO
 ```
 
-It is an ASM1-derived aerobic carbon subset, not a complete
-wastewater-treatment-plant model.
+It is an ASM1-derived aerobic carbon subset.
 
 
 ## 2. Scientific basis
@@ -393,9 +392,7 @@ bH  = 0.235 d-1   [inactive]
 kh  = 2.689 d-1
 ```
 
-The parameter set is based on conventional ASM1/BSM1 benchmark-scale
-values rather than calibration to biological measurements from a
-specific treatment plant.
+The parameter set uses conventional ASM1/BSM1 benchmark-scale values.
 
 
 ## 11. Biomass treatment
@@ -408,7 +405,7 @@ X_{BH} = 2.55\ \mathrm{kg\,COD\,m^{-3}}
 
 for the current simulations.
 
-This is a benchmark-scale input, not a site-specific measurement.
+This is a benchmark-scale input.
 
 A fixed biomass inventory is used because the computational domain does
 not contain the secondary clarifier, return-sludge stream, waste-sludge
@@ -448,11 +445,9 @@ diffuser-layout comparison.
 S_I + S_S + X_I + X_S + X_{BH} + X_P.
 ```
 
-`mixedLiquorCOD` must not be interpreted as final plant effluent COD.
-
-The CFD domain contains no secondary clarifier and therefore does not
-simulate separation of biomass and suspended particulate matter from
-the treated liquid.
+`mixedLiquorCOD` represents the in-tank mixture, including biomass and
+suspended particulate matter. The CFD domain contains no secondary
+clarifier or solids-separation stage.
 
 
 ### Additional diagnostic outputs
@@ -661,9 +656,6 @@ The resulting advective-plus-source oxygen budget had a residual of
 approximately 0.88% relative to the integrated bubble-transfer rate
 before explicitly accounting for the boundary diffusive contribution.
 
-This is reported as an oxygen-balance consistency check, not as a
-complete closed oxygen mass balance.
-
 
 ### 15.8 Verification summary
 
@@ -693,16 +685,14 @@ complete closed oxygen mass balance.
   one-way coupling from aeration CFD to the biological response.
 - Atmosphere-adjacent cells are excluded from dispersed-bubble transfer,
   and direct free-surface reaeration is not modelled.
-- `substrateCOD` is biodegradable substrate COD, not measured BOD5 or
-  total final-effluent COD; no fixed BOD5 conversion is applied.
+- `substrateCOD` represents biodegradable substrate COD; inert fractions,
+  biomass, measured BOD5, and total final-effluent COD are separate quantities.
 
 
 ## 17. Validation status
 
-The implementation has been mathematically and numerically verified as
-described above. It has not been experimentally validated against
-biological measurements from this tank and is not a validated
-replacement for the full IWA ASM1 model.
+The implementation verification is documented in Sections 14 and 15.
+Tank-specific experimental validation was outside the project scope.
 
 
 ## 18. Building the solver

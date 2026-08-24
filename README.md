@@ -141,7 +141,7 @@ substrateCOD = SS + XS
 
 This represents biodegradable substrate COD.
 
-It should not be interpreted as total plant effluent COD because inert COD fractions and biomass are treated separately.
+Inert COD fractions and biomass are accounted for separately.
 
 The model also calculates:
 
@@ -227,7 +227,7 @@ Field:
 alpha.airMean
 ```
 
-`alpha.airMean` is the time-averaged air-volume-fraction field from the aeration stage, averaged over **180–300 s**. It is not an instantaneous field and is not a reduced ASM1 result.
+`alpha.airMean` is the time-averaged air-volume-fraction field from the aeration stage, averaged over **180–300 s**.
 
 A representative horizontal slice was taken at:
 
@@ -402,7 +402,7 @@ Case C produces the largest spatial variation.
 | Case B – Central | **0%** |
 | Case C – Lateral | **0.77%** |
 
-The low-DO region in Case C is localised rather than tank-wide. It mainly follows an axial inlet-to-downstream gradient and is not evidence that the lateral diffuser banks fail to oxygenate the sides. A field check found a minimum of **0.5 mg/L** near `x = 0` and a maximum of approximately **11.83 mg/L** near `x = 37.1 m`, `y = 4.47 m`, close to a lateral region. This is internally consistent with the lateral-bank configuration.
+The low-DO region in Case C is localised rather than tank-wide and mainly follows an axial inlet-to-downstream gradient. A field check found a minimum of **0.5 mg/L** near `x = 0` and a maximum of approximately **11.83 mg/L** near `x = 37.1 m`, `y = 4.47 m`, close to a lateral region.
 
 ### Flow-weighted outlet DO
 
@@ -478,7 +478,7 @@ Case C produces the greatest spatial variation.
 | Case B – Central | **97.43%** |
 | Case C – Lateral | **98.33%** |
 
-The final reduced ASM1 biodegradable-substrate reductions are all very similar. The small differences do not indicate a major change in overall biological removal efficiency between diffuser layouts.
+The final reduced ASM1 biodegradable-substrate reductions are all very similar, with only small differences in overall biological removal efficiency between diffuser layouts.
 
 Case C gives the lowest outlet biodegradable substrate concentration, but only by a small margin.
 
@@ -560,7 +560,7 @@ The project includes:
 - DO uniformity calculations
 - substrate uniformity calculations
 
-The results were checked for numerical convergence, conservation, and consistency. They are not presented as experimentally validated results.
+The results were checked for numerical convergence, conservation, and consistency.
 
 ---
 
@@ -622,5 +622,3 @@ The current model does not include:
 - waste activated sludge
 - dynamic solids retention time
 - full plant-wide ASM1 dynamics
-
-The project is therefore a coupled aeration CFD and reduced biological-treatment model rather than a complete wastewater-treatment-plant simulation.
