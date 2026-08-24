@@ -127,8 +127,6 @@ The model includes:
 
 The heterotrophic biomass concentration is prescribed because the CFD domain does not contain a secondary clarifier, return activated sludge loop, or waste activated sludge system.
 
-The earlier simplified BioCOD calculations are superseded development results and are not mixed with the final reduced ASM1 results reported below.
-
 ---
 
 ## Biodegradable substrate COD
@@ -201,7 +199,7 @@ Direct free-surface reaeration is not included.
 
 ## Summary plots
 
-The following plots complement the contour-field results with direct comparisons of the three diffuser layouts. In these plots, Case A is consistently labelled **Distributed (A)**.
+The following plots complement the contour-field results with direct comparisons of the three diffuser layouts.
 
 The mean oxygen-transfer coefficient and mean gas holdup summarize the developed aeration period from **180–300 s**. Case A has the highest mean `kLa` and mean gas holdup, while the contour fields below show how these aeration quantities are distributed through the tank.
 
@@ -209,7 +207,7 @@ The mean oxygen-transfer coefficient and mean gas holdup summarize the developed
 
 ![Mean gas holdup comparison](figures/hydrodynamics/03_gas_holdup_comparison.png)
 
-The outlet dissolved-oxygen and biodegradable-substrate-COD plots summarize the final reduced-ASM1 response. The dashed line in the DO plot is an approximate **reference surface saturation DO at 12 °C (≈ 10.8 mg/L)**; it is not the spatially varying `DOsatLocalMean` field used by the model.
+The outlet dissolved-oxygen and biodegradable-substrate-COD plots summarize the final reduced-ASM1 response. The dashed line in the DO plot is an approximate **reference surface saturation DO at 12 °C (≈ 10.8 mg/L)**; based on the varying `DOsatLocalMean` field used by the model.
 
 ![Flow-weighted outlet dissolved oxygen comparison](figures/biological_response/04_outlet_DO_comparison.png)
 
