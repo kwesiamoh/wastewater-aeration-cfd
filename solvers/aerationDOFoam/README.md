@@ -135,6 +135,5 @@ These checks cover mathematical and numerical verification of the implemented mo
 ## References
 
 - Fayolle, Y., Cockx, A., Gillot, S., Roustan, M., & Héduit, A. (2007). Oxygen transfer prediction in aeration tanks using CFD. *Chemical Engineering Science, 62*(24), 7163–7171. https://doi.org/10.1016/j.ces.2007.08.082
-- Higbie, R. (1935). The rate of absorption of a pure gas into a still liquid during short periods of exposure. *Transactions of the American Institute of Chemical Engineers, 31*, 365–377.
 - Sánchez, F., Rey, H., Viedma, A., Nicolás-Pérez, F., Kaiser, A. S., & Martínez, M. (2018). CFD simulation of fluid dynamic and biokinetic processes within activated sludge reactors under intermittent aeration regime. *Water Research, 139*, 47–57. https://doi.org/10.1016/j.watres.2018.03.067
 - Shah, K. A., Jiao, Y., & Chen, J. (2024). CFD investigation of dissolved oxygen distribution in a full-scale aeration tank of an industrial wastewater treatment plant. *Journal of Water Process Engineering, 59*, 105078. https://doi.org/10.1016/j.jwpe.2024.105078
